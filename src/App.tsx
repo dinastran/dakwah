@@ -1,4 +1,4 @@
-// src/App.tsx
+/ src/App.tsx
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
@@ -13,29 +13,15 @@ function App() {
   return (
     <Router>
       <div className="flex flex-col h-screen bg-gray-100">
-        {/* Navbar for desktop */}
         <Navbar />
-
-        {/* Main content area */}
         <div className="flex-1 flex overflow-hidden">
-          {/* Sidebar for mobile */}
-          <Sidebar 
-            isOpen={isSidebarOpen}
-            setIsOpen={setIsSidebarOpen}
-          />
-
-          {/* Page content */}
+          <Sidebar isOpen={isSidebarOpen} setIsOpen={setIsSidebarOpen} />
           <main className="flex-1 overflow-x-hidden overflow-y-auto bg-gray-100">
-            {/* Mobile menu button */}
             <div className="lg:hidden p-4">
-              <button
-                onClick={() => setIsSidebarOpen(true)}
-                className="text-gray-500 focus:outline-none focus:text-gray-700"
-              >
+              <button onClick={() => setIsSidebarOpen(true)} className="text-gray-500 focus:outline-none focus:text-gray-700">
                 <Menu size={24} />
               </button>
             </div>
-
             <div className="container mx-auto px-6 py-8">
               <Routes>
                 <Route path="/" element={<Dashboard />} />
