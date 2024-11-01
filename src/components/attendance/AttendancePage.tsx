@@ -1,3 +1,4 @@
+// src/components/attendance/AttendancePage.tsx
 import React from 'react';
 import AttendanceForm from './AttendanceForm';
 import { BookOpen } from 'lucide-react';
