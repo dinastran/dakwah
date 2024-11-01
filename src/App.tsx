@@ -7,33 +7,53 @@ import { Menu } from 'lucide-react';
 
 function App() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  const [currentPage, setCurrentPage] = useState('dashboard'); // Add state for current page
+  const [currentPage, setCurrentPage] = useState('dashboard');
 
-  // Function to handle navigation
   const handleNavigation = (page: string) => {
     setCurrentPage(page);
-    setIsSidebarOpen(false); // Close sidebar on mobile after navigation
+    setIsSidebarOpen(false);
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <button
-        onClick={() => setIsSidebarOpen(true)}
-        className="fixed top-4 left-4 p-2 rounded-lg bg-white shadow-md hover:bg-gray-50 lg:hidden z-50"
-      >
-        <Menu className="w-6 h-6 text-gray-600" />
-      </button>
-
-      <div className="flex">
+    <div className="flex h-screen bg-gray-100">
+      {/* Sidebar for desktop */}
+      <div className="hidden lg:flex">
         <Sidebar 
-          isOpen={isSidebarOpen} 
+          isOpen={true}
+          setIsOpen={() => {}}
+          onNavigate={handleNavigation}
+          currentPage={currentPage}
+        />
+      </div>
+
+      {/* Main content area */}
+      <div className="flex-1 flex flex-col overflow-hidden">
+        {/* Top bar for mobile */}
+        <header className="bg-white shadow-sm lg:hidden">
+          <div className="px-4 py-3">
+            <button
+              onClick={() => setIsSidebarOpen(true)}
+              className="text-gray-500 focus:outline-none focus:text-gray-700"
+            >
+              <Menu size={24} />
+            </button>
+          </div>
+        </header>
+
+        {/* Mobile sidebar */}
+        <Sidebar 
+          isOpen={isSidebarOpen}
           setIsOpen={setIsSidebarOpen}
           onNavigate={handleNavigation}
           currentPage={currentPage}
         />
-        <main className="flex-1">
-          {currentPage === 'dashboard' && <Dashboard />}
-          {currentPage === 'attendance' && <AttendancePage />}
+
+        {/* Page content */}
+        <main className="flex-1 overflow-x-hidden overflow-y-auto bg-gray-100">
+          <div className="container mx-auto px-6 py-8">
+            {currentPage === 'dashboard' && <Dashboard />}
+            {currentPage === 'attendance' && <AttendancePage />}
+          </div>
         </main>
       </div>
     </div>
