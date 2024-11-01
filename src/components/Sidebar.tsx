@@ -49,3 +49,23 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, setIsOpen, onNavigate, curren
           <nav className="flex-1 overflow-y-auto py-4">
             {menuItems.map((item) => (
               <button
+                key={item.id}
+                onClick={() => onNavigate(item.id)}
+                className={`flex items-center w-full px-4 py-2 text-left
+                  ${currentPage === item.id
+                    ? 'bg-green-50 text-green-600'
+                    : 'text-gray-700 hover:bg-gray-100'
+                  }`}
+              >
+                <item.icon className="h-5 w-5 mr-3" />
+                <span>{item.label}</span>
+              </button>
+            ))}
+          </nav>
+        </div>
+      </div>
+    </>
+  );
+};
+
+export default Sidebar;
