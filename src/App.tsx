@@ -1,10 +1,19 @@
+// src/App.tsx
 import React, { useState } from 'react';
 import Sidebar from './components/Sidebar';
 import AttendancePage from './components/attendance/AttendancePage';
+import Dashboard from './components/Dashboard';
 import { Menu } from 'lucide-react';
 
 function App() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [currentPage, setCurrentPage] = useState('dashboard'); // Add state for current page
+
+  // Function to handle navigation
+  const handleNavigation = (page: string) => {
+    setCurrentPage(page);
+    setIsSidebarOpen(false); // Close sidebar on mobile after navigation
+  };
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -16,9 +25,15 @@ function App() {
       </button>
 
       <div className="flex">
-        <Sidebar isOpen={isSidebarOpen} setIsOpen={setIsSidebarOpen} />
+        <Sidebar 
+          isOpen={isSidebarOpen} 
+          setIsOpen={setIsSidebarOpen}
+          onNavigate={handleNavigation}
+          currentPage={currentPage}
+        />
         <main className="flex-1">
-          <AttendancePage />
+          {currentPage === 'dashboard' && <Dashboard />}
+          {currentPage === 'attendance' && <AttendancePage />}
         </main>
       </div>
     </div>
