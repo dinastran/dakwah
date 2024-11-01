@@ -39,4 +39,32 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, setIsOpen }) => {
             <h2 className="text-xl font-bold text-gray-800">Menu</h2>
             <button
               onClick={() => setIsOpen(false)}
-              className="p-2 rounded-md text-gray-500 hover:bg-
+              className="p-2 rounded-md text-gray-500 hover:bg-gray-100"
+            >
+              <X size={20} />
+            </button>
+          </div>
+
+          <nav className="flex-1 overflow-y-auto py-4">
+            {menuItems.map((item) => (
+              <button
+                key={item.id}
+                onClick={() => onNavigate(item.id)}
+                className={`flex items-center w-full px-4 py-2 text-left
+                  ${currentPage === item.id
+                    ? 'bg-green-50 text-green-600'
+                    : 'text-gray-700 hover:bg-gray-100'
+                  }`}
+              >
+                <item.icon className="h-5 w-5 mr-3" />
+                <span>{item.label}</span>
+              </button>
+            ))}
+          </nav>
+        </div>
+      </div>
+    </>
+  );
+};
+
+export default Sidebar;
